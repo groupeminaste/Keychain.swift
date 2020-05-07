@@ -1,6 +1,6 @@
 # Keychain
 
-A swift package to manage a REST API
+A swift package to easily implement Keychain on your iOS apps, with a UserDefaults-like implementation.
 
 ## Installation
 
