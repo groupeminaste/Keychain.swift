@@ -60,7 +60,7 @@ public class Keychain {
             query[kSecAttrAccessGroup as String] = accessGroup as String
         }
 
-        var dataTypeRef: AnyObject? = nil
+        var dataTypeRef: AnyObject?
 
         let status: OSStatus = SecItemCopyMatching(query as CFDictionary, &dataTypeRef)
         print(status)
