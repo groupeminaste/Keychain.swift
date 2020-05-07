@@ -11,13 +11,13 @@ import Security
 
 public class Keychain {
     
-    let accessGroup:String
+    private let accessGroup: String
     
-    init(accessGroup: String) {
+    public init(accessGroup: String) {
         self.accessGroup = accessGroup
     }
 
-    func save(_ data: Any, forKey: String) -> Bool {
+    public func save(_ data: Any, forKey: String) -> Bool {
         let savedData: Data
         do {
             if #available(iOS 11.0, *) {
@@ -47,7 +47,7 @@ public class Keychain {
         }
     }
 
-    func value(forKey: String) -> Any? {
+    public func value(forKey: String) -> Any? {
         let query = [
             kSecClass as String       : kSecClassGenericPassword,
             kSecAttrAccount as String : forKey,
@@ -76,7 +76,7 @@ public class Keychain {
         }
     }
     
-    func remove(forKey: String) -> Bool {
+    public func remove(forKey: String) -> Bool {
         let query = [
         kSecClass as String       : kSecClassGenericPassword as String,
         kSecAttrAccount as String : forKey,
@@ -92,7 +92,7 @@ public class Keychain {
         }
     }
 
-    func createUniqueID() -> String {
+    private func createUniqueID() -> String {
         let uuid: CFUUID = CFUUIDCreate(nil)
         let cfStr: CFString = CFUUIDCreateString(nil, uuid)
 
