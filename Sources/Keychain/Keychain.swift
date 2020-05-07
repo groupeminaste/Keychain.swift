@@ -9,7 +9,7 @@
 import Foundation
 import Security
 
-class Keychain {
+public class Keychain {
     
     let accessGroup:String
     
