@@ -11,9 +11,9 @@ import Security
 
 public class Keychain {
     
-    private let accessGroup: String
+    private let accessGroup: String?
     
-    public init(accessGroup: String) {
+    public init(accessGroup: String? = nil) {
         self.accessGroup = accessGroup
     }
 
@@ -29,12 +29,14 @@ public class Keychain {
         } catch {
             savedData = Data()
         }
-        let query = [
+        var query = [
             kSecClass as String       : kSecClassGenericPassword as String,
             kSecAttrAccount as String : forKey,
-            kSecValueData as String   : savedData,
-            kSecAttrAccessGroup as String : accessGroup as String] as [String : Any]
-
+            kSecValueData as String   : savedData] as [String : Any]
+        
+        if let accessGroup = accessGroup {
+            query[kSecAttrAccessGroup as String] = accessGroup as String
+        }
         SecItemDelete(query as CFDictionary)
         
         let status = SecItemAdd(query as CFDictionary, nil)
@@ -48,12 +50,15 @@ public class Keychain {
     }
 
     public func value(forKey: String) -> Any? {
-        let query = [
+        var query = [
             kSecClass as String       : kSecClassGenericPassword,
             kSecAttrAccount as String : forKey,
             kSecReturnData as String  : kCFBooleanTrue!,
-            kSecMatchLimit as String  : kSecMatchLimitOne,
-            kSecAttrAccessGroup as String : accessGroup as String] as [String : Any]
+            kSecMatchLimit as String  : kSecMatchLimitOne] as [String : Any]
+        
+        if let accessGroup = accessGroup {
+            query[kSecAttrAccessGroup as String] = accessGroup as String
+        }
 
         var dataTypeRef: AnyObject? = nil
 
@@ -77,11 +82,14 @@ public class Keychain {
     }
     
     public func remove(forKey: String) -> Bool {
-        let query = [
+        var query = [
         kSecClass as String       : kSecClassGenericPassword as String,
-        kSecAttrAccount as String : forKey,
-        kSecAttrAccessGroup as String : accessGroup as String] as [String : Any]
-
+        kSecAttrAccount as String : forKey] as [String : Any]
+        
+        if let accessGroup = accessGroup {
+            query[kSecAttrAccessGroup as String] = accessGroup as String
+        }
+        
         let status: OSStatus = SecItemDelete(query as CFDictionary)
         print(status)
 
