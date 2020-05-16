@@ -43,7 +43,6 @@ public class Encryption {
         error = SecKeyEncrypt(publicKey, padding, &ucontent, ucontent.count, &messageEncrypted, &messageEncryptedSize)
         
         if error != noErr {
-            print("Encryption Error!")
             return nil
         }
         
@@ -62,7 +61,6 @@ public class Encryption {
         let data = SecKeyCreateEncryptedData(publicKey, usingAlgorithm, content, &status)
             
         if let stat = status?.takeRetainedValue(), stat.localizedDescription.isEmpty {
-            print("Encryption Error!")
             return nil
         }
             
@@ -87,7 +85,6 @@ public class Encryption {
         error = SecKeyDecrypt(privateKey, padding, data, messageEncryptedSize, &messageDecrypted, &messageDecryptedSize)
         
         if error != noErr {
-            print("Encryption Error!")
             return nil
         }
         
@@ -105,7 +102,6 @@ public class Encryption {
         let decrypted = SecKeyCreateDecryptedData(privateKey, usingAlgorithm, content, &status)
             
         if let stat = status?.takeRetainedValue(), stat.localizedDescription.isEmpty {
-            print("Encryption Error!")
             return nil
         }
                     
