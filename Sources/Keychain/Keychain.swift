@@ -40,7 +40,6 @@ public class Keychain {
         SecItemDelete(query as CFDictionary)
         
         let status = SecItemAdd(query as CFDictionary, nil)
-        print(status)
         
         if status == noErr {
             return true
@@ -63,7 +62,6 @@ public class Keychain {
         var dataTypeRef: AnyObject?
 
         let status: OSStatus = SecItemCopyMatching(query as CFDictionary, &dataTypeRef)
-        print(status)
 
         if status == noErr {
             if let d = dataTypeRef as? Data {
@@ -91,7 +89,6 @@ public class Keychain {
         }
         
         let status: OSStatus = SecItemDelete(query as CFDictionary)
-        print(status)
 
         if status == noErr {
             return true
