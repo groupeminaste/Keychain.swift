@@ -20,7 +20,7 @@ public class Keychain {
     public func save(_ data: Any, forKey: String) -> Bool {
         let savedData: Data
         do {
-            if #available(iOS 11.0, *) {
+            if #available(iOS 11.0, watchOS 4.0, *) {
                 savedData = try NSKeyedArchiver.archivedData(withRootObject: data, requiringSecureCoding: true)
             } else {
                 // Fallback on earlier versions

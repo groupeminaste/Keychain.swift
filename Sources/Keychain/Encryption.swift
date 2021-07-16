@@ -11,7 +11,6 @@ import Security
 
 public class Encryption {
     
-    
     public func getKeys(useEncryptionModule: CFString, keySize: Int) -> (publicKey: SecKey?, privateKey: SecKey?) {
         //Generation of RSA private and public keys
         let parameters: [String:Any] = [
@@ -54,7 +53,7 @@ public class Encryption {
     #endif
     
     
-    @available(iOS 10.0, *)
+    @available(iOS 10.0, watchOS 3.0, *)
     public func encrypt(content: CFData, publicKey: SecKey, usingAlgorithm: SecKeyAlgorithm) -> CFData? {
         var status = Unmanaged<CFError>?.init(nilLiteral: ())
             
@@ -94,7 +93,7 @@ public class Encryption {
     }
     #endif
     
-    @available(iOS 10.0, *)
+    @available(iOS 10.0, watchOS 3.0, *)
     public func decrypt(privateKey: SecKey, content: CFData, usingAlgorithm: SecKeyAlgorithm) -> CFData? {
         //Decrypt the entrypted string with the private key
         var status = Unmanaged<CFError>?.init(nilLiteral: ())
@@ -107,4 +106,5 @@ public class Encryption {
                     
         return decrypted
     }
+    
 }
