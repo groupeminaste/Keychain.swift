@@ -53,7 +53,7 @@ public class Encryption {
     #endif
     
     
-    @available(iOS 10.0, watchOS 3.0, *)
+    @available(iOS 10.0, macOS 10.12, watchOS 3.0, *)
     public func encrypt(content: CFData, publicKey: SecKey, usingAlgorithm: SecKeyAlgorithm) -> CFData? {
         var status = Unmanaged<CFError>?.init(nilLiteral: ())
             
@@ -93,7 +93,7 @@ public class Encryption {
     }
     #endif
     
-    @available(iOS 10.0, watchOS 3.0, *)
+    @available(iOS 10.0, macOS 10.12, watchOS 3.0, *)
     public func decrypt(privateKey: SecKey, content: CFData, usingAlgorithm: SecKeyAlgorithm) -> CFData? {
         //Decrypt the entrypted string with the private key
         var status = Unmanaged<CFError>?.init(nilLiteral: ())
